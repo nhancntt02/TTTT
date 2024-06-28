@@ -146,6 +146,7 @@ export default {
             if (confirm("Bạn muốn xác nhận đơn hàng: " + orderId)) {
                 try {
                     const result = await orderService.update(orderId);
+                    location.reload();
                     console.log(result);
                 } catch (error) {
                     console.log(error);

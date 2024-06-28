@@ -26,7 +26,7 @@
                             {{ status[orderItem] }}
                         </td>
                         <td class="col-2 d-flex align-items-center justify-content-center">
-                            <button v-if="status[orderItem] == 'Đang giao hàng'" class="btn btn-outline-success">
+                            <button v-if="status[orderItem] == 'Đang vận chuyển'" @click="giveProduct(orderItem)" class="btn btn-outline-success">
                                 Đã nhận hàng
                             </button>
                             <button v-else disabled class="btn btn-outline-secondary">
@@ -93,6 +93,18 @@ export default {
                 console.log(error);
             }
         },
+
+        async giveProduct(orderId) {
+            try {
+                if(confirm('Bạn muốn xác nhận đã lấy được hàng?')){
+                    await orderService.update(orderId);
+                    location.reload();
+                }
+                
+            } catch (error) {
+                console.log(error);
+            }
+        }
     },
     mounted() {
         this.getOrder();
